@@ -31,7 +31,7 @@ if, in the future, decide to change to another type, it will still work-->
                 @Html.ActionLink(customer.Name, "Details", "Customers",
                     new {id = customer.Id},null)
             </td>
-            <td>@customer.Id</td>
+            <td>@customer.MemberShipType.DiscountRate%</td>
         </tr>
         }
 
