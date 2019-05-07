@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Vidly.Models.Movie>
+@{
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mb-4">@ViewBag.Title</h1>
+
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr scope="col">@ViewBag.Title</tr>
+    </thead>
+    <tbody>
+        <!--Empty Model, empty list-->
+        @if (!Model.Any())
+        {
+            <tr>
+                <td>We don't have any customer yet</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var movie in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(movie.Name, "Details", "Movies",
+                            new {id = movie.Id},null)
+                    </td>
+                    <td>@movie.Id</td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
+
+

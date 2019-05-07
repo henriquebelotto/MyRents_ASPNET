@@ -1,12 +1,25 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
+﻿
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+a {
+    color: #878580;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.nav-item > a {
+    color: #fff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.nav-item > a:hover {
+    color: #0f7864;
+    text-decoration: underline;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -21,4 +34,28 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.nav-item {
+    margin-right: 10%;
+}
+
+.no-underline > a:hover {
+    text-decoration: none;
+}
+
+.active > a {
+    color: #18bc9c;
+}
+
+.index-content {
+    box-shadow: 2px 5px 9px #888888;
+}
+
+.auth-card {
+    box-shadow: 2px 5px 9px #888888;
+}
+
+.register-form-section {
+    margin-top: 5%;
 }

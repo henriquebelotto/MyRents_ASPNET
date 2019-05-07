@@ -1,0 +1,17 @@
+﻿@model Vidly.Models.Movie
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+@if (@Model != null)
+{
+    @Model.Name
+}
+else
+{
+    <p>Movie NOT found</p>
+}
