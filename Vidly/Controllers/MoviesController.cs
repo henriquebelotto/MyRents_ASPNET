@@ -1,38 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Vidly.Models;
-using Vidly.ViewModels;
+using System.Data.Entity;
 
 namespace Vidly.Controllers
 {
     public class MoviesController : Controller
     {
+
+        // prefix underline because it's a private variable
+        private ApplicationDbContext _context;
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
+        public MoviesController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        // Using ViewResult method because the only return method is a view
         // GET: Movies/Index
         public ViewResult Index()
         {
-            var Movies = GetMovies();
+            var Movies = _context.Movies.Include(e => e.Genre).ToList();
 
             return View(Movies);
         }
 
-        public ViewResult Details(int id)
+        // Using ActionResult because there is two possible return methods
+        // GET: Movies/Details/{id}
+        public ActionResult Details(int id)
         {
-            var movie = GetMovies().SingleOrDefault(m => m.Id == id);
-            return View(movie);
-        }
 
-        private IEnumerable<Movie> GetMovies()
-        {
-            return new List<Movie>
+            var Movie = _context.Movies.Include(e => e.Genre).SingleOrDefault(e => e.Id == id);
+
+            if (Movie == null)
             {
-                new Movie {Id = 0, Name = "Star Wars"},
-                new Movie {Id = 1, Name = "Inception"}
-            };
-        }
+                return HttpNotFound();
+            }
+      
 
+            return View(Movie);
+        }
 
         // ------------------------------------//
         // EXAMPLES BELOW - NOT ACTUAL METHODS

@@ -5,16 +5,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>@Model.Name</h2>
 
 @if (@Model != null)
 {
 <ul>
-    <li><b>Customer's Name:</b> @Model.Name</li>
     <li><b>Membership Type:</b> @Model.MemberShipType.Name</li>
     @if (@Model.Birthday.HasValue)
     {
         <li><b>Birthday:</b> @(((DateTime) Model.Birthday).ToShortDateString())</li>
+        @* Another way to use the same value
+            <li><b>Birthday:</b> @Model.Birthday.Value.ToShortDateString()</li>
+        *@
     }
 </ul>
     
