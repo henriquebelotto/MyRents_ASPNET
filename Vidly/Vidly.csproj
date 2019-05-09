@@ -212,6 +212,14 @@
     <Compile Include="Migrations\201905091642281_AddBirthdayToCustomer.Designer.cs">
       <DependentUpon>201905091642281_AddBirthdayToCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905091718015_AddMoviePropertiesAndGenreTable.cs" />
+    <Compile Include="Migrations\201905091718015_AddMoviePropertiesAndGenreTable.Designer.cs">
+      <DependentUpon>201905091718015_AddMoviePropertiesAndGenreTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905091719119_PopulateMovieGenreTable.cs" />
+    <Compile Include="Migrations\201905091719119_PopulateMovieGenreTable.Designer.cs">
+      <DependentUpon>201905091719119_PopulateMovieGenreTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -219,6 +227,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\MovieGenre.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\RandomMovieViewModel.cs" />
@@ -351,6 +360,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905091642281_AddBirthdayToCustomer.resx">
       <DependentUpon>201905091642281_AddBirthdayToCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905091718015_AddMoviePropertiesAndGenreTable.resx">
+      <DependentUpon>201905091718015_AddMoviePropertiesAndGenreTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905091719119_PopulateMovieGenreTable.resx">
+      <DependentUpon>201905091719119_PopulateMovieGenreTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
