@@ -21,5 +21,8 @@ namespace Vidly.Models
 
         // Entity Framework recognize this property as a foreign key to the MemberShipType table
         public Byte MembershipTypeId { get; set; }
+
+        public string  Birthday { get; set; }
+    
     }
 }
