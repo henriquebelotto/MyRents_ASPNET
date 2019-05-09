@@ -42,7 +42,7 @@ namespace Vidly.Controllers
         public ActionResult Details(int id)
         {
             // Using lambda expression to get the customer
-            var Customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            var Customer = _context.Customers.Include(m => m.MemberShipType).SingleOrDefault(c => c.Id == id);
 
             if (Customer == null)
             {

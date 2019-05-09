@@ -9,7 +9,15 @@
 
 @if (@Model != null)
 {
-    @Model.Name
+<ul>
+    <li><b>Customer's Name:</b> @Model.Name</li>
+    <li><b>Membership Type:</b> @Model.MemberShipType.Name</li>
+    @if (@Model.Birthday.HasValue)
+    {
+        <li><b>Birthday:</b> @(((DateTime) Model.Birthday).ToShortDateString())</li>
+    }
+</ul>
+    
 }
 else
 {
