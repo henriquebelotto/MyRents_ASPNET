@@ -27,6 +27,8 @@ namespace Vidly.Models
         // The problem with approach is that every time that you want to change the lable
         // have to recompile the code
         [Display(Name = "Date of Birth")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime?  Birthday { get; set; }
     
     }

@@ -29,7 +29,7 @@ if, in the future, decide to change to another type, it will still work-->
                 {
                     <tr>
                         <td>
-                            @Html.ActionLink(customer.Name, "Details", "Customers",
+                            @Html.ActionLink(customer.Name, "Edit", "Customers",
                                 new {id = customer.Id},null)
                         </td>
                         <td>@customer.MemberShipType.Name</td>

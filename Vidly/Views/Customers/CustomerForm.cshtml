@@ -1,4 +1,4 @@
-﻿@model Vidly.ViewModels.NewCustomerViewModel
+﻿@model Vidly.ViewModels.CustomerFormViewModel
 @{
     ViewBag.Title = "New";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,7 +22,8 @@ the object will be disposed (a closing html tag) -->
         @Html.LabelFor(m => m.Customer.Birthday)
         <!--You Can use HTML tag or use the property Display inside the model-->
         <!--<label for ="Birthday">Date of Birth:</label>-->
-        @Html.TextBoxFor(m => m.Customer.Birthday, new { @type = "date", @class = "form-control", @value = @DateTime.Now})
+        <!--HTML5 requires the format to be yyyy-MM-dd to work-->
+        @Html.TextBoxFor(m => m.Customer.Birthday, "{0:yyyy-MM-dd}",new { @type = "date", @class = "form-control"})
     </div>
 
     <!--Checkbox for newsletter -->
