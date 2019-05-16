@@ -19,9 +19,14 @@ namespace Vidly.Models
         // Navigation property - Allows to navigate from one model to another
         public MembershipType MemberShipType { get; set; }
 
+        [Display(Name = "Membership Type")]
         // Entity Framework recognize this property as a foreign key to the MemberShipType table
         public Byte MembershipTypeId { get; set; }
 
+        // Display property of name as Date of Birth
+        // The problem with approach is that every time that you want to change the lable
+        // have to recompile the code
+        [Display(Name = "Date of Birth")]
         public DateTime?  Birthday { get; set; }
     
     }

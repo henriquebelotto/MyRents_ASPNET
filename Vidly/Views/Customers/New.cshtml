@@ -1,0 +1,43 @@
+﻿@model Vidly.ViewModels.NewCustomerViewModel
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Customer</h2>
+
+<!--Helper method - ActionName: Create, Inside controller "Customers-->
+<!-- Render the <form> tag only, this method returns a disposable object
+If wrap this method inside a Using block, at the end of the block, 
+the object will be disposed (a closing html tag) -->
+@using (Html.BeginForm("Create", "Customers"))
+{
+    <!--Input for name -->
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.Name)
+        @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control"})
+    </div>
+    <!--Input for Birthday -->
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.Birthday)
+        <!--You Can use HTML tag or use the property Display inside the model-->
+        <!--<label for ="Birthday">Date of Birth:</label>-->
+        @Html.TextBoxFor(m => m.Customer.Birthday, new { @type = "date", @class = "form-control", @value = @DateTime.Now})
+    </div>
+
+    <!--Checkbox for newsletter -->
+        <div class="checkbox">
+            @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsLetter, new { @class = "mr-2" })
+            @Html.LabelFor(m => m.Customer.IsSubscribedToNewsLetter)
+        </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.MembershipTypeId)
+        @Html.DropDownListFor(m => m.Customer.MembershipTypeId,
+            new SelectList(Model.MembershipTypes, "Id", "Name"), 
+            "Select Membership Type", new { @class = "form-control"})
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+

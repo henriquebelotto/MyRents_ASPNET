@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Vidly.Models;
 using System.Data.Entity;
+using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
@@ -29,23 +30,48 @@ namespace Vidly.Controllers
             // EAGER LOADING
             // THe Include method is to load the MembershipType model together.
             // Entity Framework does NOT include automatically a reference object
-            var Customers = _context.Customers.Include(c => c.MemberShipType).ToList();
+            var customers = _context.Customers.Include(c => c.MemberShipType).ToList();
             
-            return View(Customers);
+            return View(customers);
         }
 
         [Route("Customers/Details/{id}")]
         public ActionResult Details(int id)
         {
             // Using lambda expression to get the customer
-            var Customer = _context.Customers.Include(m => m.MemberShipType).SingleOrDefault(c => c.Id == id);
+            var customer = _context.Customers.Include(m => m.MemberShipType).SingleOrDefault(c => c.Id == id);
 
-            if (Customer == null)
+            if (customer == null)
             {
                 return HttpNotFound();
             }
 
-            return View(Customer);
+            return View(customer);
+        }
+
+        public ActionResult New()
+        {
+            var membershipTypes = _context.MembershipTypes.ToList();
+
+            var viewModel = new NewCustomerViewModel
+            {
+                MembershipTypes = membershipTypes
+
+            };
+
+            return View(viewModel);
+        }
+
+        // Only accessible using a post method
+        [HttpPost]
+        // MVC frameworks bind the model from the form to the controller
+        public ActionResult Create(Customer customer)
+        {
+            _context.Customers.Add(customer);
+
+            // Persisting the changes in the model
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Customers");
         }
 
     }
