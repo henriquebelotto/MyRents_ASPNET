@@ -224,6 +224,18 @@
     <Compile Include="Migrations\201905190314258_AddedMovieGenresModel.Designer.cs">
       <DependentUpon>201905190314258_AddedMovieGenresModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905190328126_AddedMovieGenresModel1.cs" />
+    <Compile Include="Migrations\201905190328126_AddedMovieGenresModel1.Designer.cs">
+      <DependentUpon>201905190328126_AddedMovieGenresModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905190330012_AddedMovieGenresModel2.cs" />
+    <Compile Include="Migrations\201905190330012_AddedMovieGenresModel2.Designer.cs">
+      <DependentUpon>201905190330012_AddedMovieGenresModel2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905190337499_modifiedPropertiesByteTobyte.cs" />
+    <Compile Include="Migrations\201905190337499_modifiedPropertiesByteTobyte.Designer.cs">
+      <DependentUpon>201905190337499_modifiedPropertiesByteTobyte.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -379,6 +391,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905190314258_AddedMovieGenresModel.resx">
       <DependentUpon>201905190314258_AddedMovieGenresModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905190328126_AddedMovieGenresModel1.resx">
+      <DependentUpon>201905190328126_AddedMovieGenresModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905190330012_AddedMovieGenresModel2.resx">
+      <DependentUpon>201905190330012_AddedMovieGenresModel2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905190337499_modifiedPropertiesByteTobyte.resx">
+      <DependentUpon>201905190337499_modifiedPropertiesByteTobyte.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

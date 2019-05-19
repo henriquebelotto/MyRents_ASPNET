@@ -27,7 +27,7 @@ the object will be disposed (a closing html tag) -->
     <!--Input for name -->
     <div class="form-group">
         @Html.LabelFor(m => m.Customer.Name)
-        @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control"})
+        @Html.TextBoxFor(m => m.Customer.Name, new { @type = "text", @class = "form-control"})
     </div>
     <!--Input for Birthday -->
     <div class="form-group">

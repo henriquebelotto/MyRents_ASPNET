@@ -27,9 +27,9 @@ namespace MyRents.Controllers
         // GET: Movies/Index
         public ViewResult Index()
         {
-            var Movies = _context.Movies.Include(e => e.Genre).ToList();
+            var movies = _context.Movies.Include(e => e.MovieGenre).ToList();
 
-            return View(Movies);
+            return View(movies);
         }
 
         // Using ActionResult because there is two possible return methods
@@ -37,7 +37,7 @@ namespace MyRents.Controllers
         public ActionResult Details(int id)
         {
 
-            var Movie = _context.Movies.Include(e => e.Genre).SingleOrDefault(e => e.Id == id);
+            var Movie = _context.Movies.Include(e => e.MovieGenre).SingleOrDefault(e => e.Id == id);
 
             if (Movie == null)
             {
@@ -137,24 +137,71 @@ namespace MyRents.Controllers
         //    return Content(year + "/" + month);
         //}
 
-        //public ActionResult New()
-        //{
-        //    //var genres = _context.MovieGenres.ToList();
 
-        //    var viewModel = new CustomerFormViewModel
-        //    {
-        //        MembershipTypes = membershipTypes
-
-        //    };
-
-        //    return View("CustomerForm", viewModel);
-        //}
-
-
-
-        public ActionResult Save()
+        // Display New movie form
+        public ActionResult New()
         {
-            throw new System.NotImplementedException();
+            var movieGenres = _context.MovieGenres.ToList();
+
+            var viewModel = new MovieFormViewModel()
+            {
+                MovieGenres = movieGenres
+
+            };
+
+            //Passing the viewModel to the view to be able to access its properties
+            return View("MovieForm", viewModel);
+        }
+
+
+        [HttpPost]
+        public ActionResult Save(Movie movie)
+        {
+            if (movie.Id == 0)
+            {
+                // New movie
+
+                // setting DateAdded for today's date
+                movie.DateAdded = System.DateTime.Now.Date;
+                
+                // Storing the movie in the DB
+                _context.Movies.Add(movie);
+            }
+            else
+            {
+                // updating movie
+
+                // getting movie from the db
+                var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
+
+                movieInDb.Name = movie.Name;
+                movieInDb.ReleaseDate = movie.ReleaseDate;
+                movieInDb.NumberInStock = movie.NumberInStock;
+                movieInDb.MovieGenreId = movie.MovieGenreId;
+
+            }
+
+            // Persisting the changes in the model
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Movies");
+        }
+
+
+        public ActionResult Edit(int id)
+        {
+            var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
+            if (movie == null)
+            {
+                // movie not found in the db
+                return HttpNotFound();
+            }
+
+            var viewModel = new MovieFormViewModel
+            {
+                Movie = movie,
+                MovieGenres = _context.MovieGenres.ToList()
+            };
+            return View("MovieForm", viewModel);
         }
     }
 }

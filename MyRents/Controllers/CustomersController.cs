@@ -25,6 +25,7 @@ namespace MyRents.Controllers
 
 
         // GET: Customers
+        [HttpGet]
         public ViewResult Index()
         {
             // EAGER LOADING
@@ -58,7 +59,7 @@ namespace MyRents.Controllers
                 MembershipTypes = membershipTypes
 
             };
-
+            //Passing the viewModel to the view to be able to access its properties
             return View("CustomerForm",viewModel);
         }
 

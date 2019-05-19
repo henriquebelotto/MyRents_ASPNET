@@ -21,10 +21,10 @@ namespace MyRents.Models
 
         [Display(Name = "Membership Type")]
         // Entity Framework recognize this property as a foreign key to the MemberShipType table
-        public Byte MembershipTypeId { get; set; }
+        public byte MembershipTypeId { get; set; }
 
         // Display property of name as Date of Birth
-        // The problem with approach is that every time that you want to change the lable
+        // The problem with approach is that every time that you want to change the label
         // have to recompile the code
         [Display(Name = "Date of Birth")]
         [DataType(DataType.Date)]

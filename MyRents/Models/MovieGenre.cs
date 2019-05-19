@@ -8,7 +8,8 @@ namespace MyRents.Models
 {
     public class MovieGenre
     {
-        public Byte Id { get; set; }
+        public byte Id { get; set; }
+
         [Required]
         public string Name { get; set; }
     }
