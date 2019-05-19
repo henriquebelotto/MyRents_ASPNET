@@ -1,0 +1,18 @@
+﻿
+<!--Partial View for the Navigation Bar-->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary navbar-fixed-top mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="#">MyRents</a>
+        <button class="navbar-toggler" aria-expanded="false" aria-controls="navbarColor01" aria-label="Toggle navigation" type="button" data-target="#navbarColor01" data-toggle="collapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item no-underline">@Html.ActionLink("Customers", "Index", "Customers")</li>
+                <li class="nav-item no-underline">@Html.ActionLink("Movie", "Index", "Movies")</li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
