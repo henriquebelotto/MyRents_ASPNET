@@ -1,0 +1,34 @@
+﻿@model MyRents.ViewModels.MovieFormViewModel
+@{
+    // Changing the Title according to the condition
+    if (Model.Movie == null)
+    {
+        // New Movie form
+        ViewBag.Title = "New Movie";
+    }
+    else
+    {
+        // Update Movie form
+        ViewBag.Title = "Update Movie";
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("save", "Movies"))
+{
+    <!--Input for name -->
+    @*<div class="form-group">
+        @Html.LabelFor(m => m.Movie.Name)
+        @Html.TextBoxFor(m => m.Movie.Name, new { @class = "form-control" })
+    </div>*@
+
+    @*<div class="form-group">
+            @Html.LabelFor(m => m.MovieGenres.Name)
+            @Html.DropDownListFor(m => m.Customer.MembershipTypeId,
+                new SelectList(Model.MembershipTypes, "Id", "Name"),
+                "Select Membership Type", new { @class = "form-control"})
+        </div>
+    *@
+}

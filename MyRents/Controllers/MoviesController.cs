@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using MyRents.Models;
 using System.Data.Entity;
+using MyRents.ViewModels;
 
 namespace MyRents.Controllers
 {
@@ -135,5 +136,25 @@ namespace MyRents.Controllers
         //public ActionResult ByReleaseDate (int year, int month) {
         //    return Content(year + "/" + month);
         //}
+
+        //public ActionResult New()
+        //{
+        //    //var genres = _context.MovieGenres.ToList();
+
+        //    var viewModel = new CustomerFormViewModel
+        //    {
+        //        MembershipTypes = membershipTypes
+
+        //    };
+
+        //    return View("CustomerForm", viewModel);
+        //}
+
+
+
+        public ActionResult Save()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
