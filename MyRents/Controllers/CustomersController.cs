@@ -65,9 +65,32 @@ namespace MyRents.Controllers
         // Only accessible using a post method
         [HttpPost]
         // MVC frameworks bind the model from the form to the controller
-        public ActionResult Create(Customer customer)
+        public ActionResult Save(Customer customer)
         {
-            _context.Customers.Add(customer);
+            if (customer.Id == 0)
+            {
+                // New customer, save to the DB
+                _context.Customers.Add(customer);
+            }
+            else
+            {
+                var customerInDB = _context.Customers.Single(c => c.Id == customer.Id);
+
+                // This method is the one recommended by Microsoft, however, it has some security issues
+                // for instance, all modifications provided by the user will be stored. But, maybe, not all
+                // properties should be accepted;
+                //TryUpdateModel(customerInDB);
+
+                // This is a another option, however, the problem with this approach is that if the property,
+                // in this example, "name" is changed in the future, then the code won't work
+                //TryUpdateModel(customerInDB, "", new string[] {"Name"});
+
+                customerInDB.Name = customer.Name;
+                customerInDB.Birthday = customer.Birthday;
+                customerInDB.MembershipTypeId = customer.MembershipTypeId;
+                customerInDB.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
+            }
+           
 
             // Persisting the changes in the model
             _context.SaveChanges();
