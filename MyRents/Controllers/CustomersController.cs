@@ -50,6 +50,7 @@ namespace MyRents.Controllers
             return View(customer);
         }
 
+        [HttpGet]
         public ActionResult New()
         {
             var membershipTypes = _context.MembershipTypes.ToList();
@@ -66,6 +67,8 @@ namespace MyRents.Controllers
 
         // Only accessible using a post method
         [HttpPost]
+        //To avoid CSRF attack using Anti-forgery Token - All the validation is done by ASP.NET MVC Framework
+        [ValidateAntiForgeryToken]
         // MVC frameworks bind the model from the form to the controller
         public ActionResult Save(Customer customer)
         {

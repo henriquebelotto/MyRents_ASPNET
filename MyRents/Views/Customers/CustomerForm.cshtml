@@ -52,6 +52,12 @@ the object will be disposed (a closing html tag) -->
 
     <!--Adding the Id to the customer -->
     @Html.HiddenFor(m => m.Customer.Id)
+    // This method creates a token (secret) and a cookie to prevent CSRF attack
+    @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
 }
 
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
