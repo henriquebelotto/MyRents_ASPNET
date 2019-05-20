@@ -1,16 +1,7 @@
 ﻿@model MyRents.ViewModels.MovieFormViewModel
 @{
-    // Changing the Title according to the condition
-    if (Model.Movie == null)
-    {
-        // New Movie form
-        ViewBag.Title = "New Movie";
-    }
-    else
-    {
-        // Update Movie form
-        ViewBag.Title = "Update Movie";
-    }
+    // Get the title from the MovieFormViewModel
+    ViewBag.Title = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 

@@ -13,5 +13,21 @@ namespace MyRents.ViewModels
         public IEnumerable<MembershipType> MembershipTypes { get; set; }
 
         public Customer Customer { get; set; }
+
+        // Property to set the title of the view according to the option
+        public string Title
+        {
+            get
+            {
+                if (Customer != null && Customer.Id != 0)
+                {
+                    // Editing an existing customer
+                    return "Edit Customer";
+                }
+
+                // Adding new customer
+                return "New Customer";
+            }
+        }
     }
 }

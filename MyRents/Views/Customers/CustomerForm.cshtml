@@ -1,17 +1,9 @@
 ﻿@model MyRents.ViewModels.CustomerFormViewModel
 @{
     // Changing the Title according to the condition
-    if (Model.Customer == null)
-    {
-        // New customer form
-        ViewBag.Title = "New Customer";
-    }
-    else
-    {
-        // Update customer form
-        ViewBag.Title = "Update Customer";
-    }
+    var title = (Model.Customer == null) ? "New Customer" : "Update Customer";
 
+    ViewBag.Title = title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 

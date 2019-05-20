@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using MyRents.Models;
@@ -162,7 +163,7 @@ namespace MyRents.Controllers
                 // New movie
 
                 // setting DateAdded for today's date
-                movie.DateAdded = System.DateTime.Now.Date;
+                movie.DateAdded = DateTime.Now.Date;
                 
                 // Storing the movie in the DB
                 _context.Movies.Add(movie);
