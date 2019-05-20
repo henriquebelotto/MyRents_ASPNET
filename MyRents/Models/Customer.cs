@@ -32,6 +32,7 @@ namespace MyRents.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         // Custom validation
         [Min18YearsIfMember]
+        [NoFutureBirthday]
         public DateTime?  Birthday { get; set; }
     
     }

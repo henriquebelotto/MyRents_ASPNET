@@ -36,20 +36,7 @@ namespace MyRents.Controllers
             return View(customers);
         }
 
-        [Route("Customers/Details/{id}")]
-        public ActionResult Details(int id)
-        {
-            // Using lambda expression to get the customer
-            var customer = _context.Customers.Include(m => m.MemberShipType).SingleOrDefault(c => c.Id == id);
-
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(customer);
-        }
-
+        // GET: CustomerForm
         [HttpGet]
         public ActionResult New()
         {

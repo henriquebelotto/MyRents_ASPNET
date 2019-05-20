@@ -163,7 +163,7 @@ namespace MyRents.Controllers
                 // New movie
 
                 // setting DateAdded for today's date
-                movie.DateAdded = DateTime.Now.Date;
+                movie.DateAdded = DateTime.Today.Date;
                 
                 // Storing the movie in the DB
                 _context.Movies.Add(movie);
