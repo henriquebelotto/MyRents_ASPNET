@@ -10,8 +10,8 @@ namespace MyRents.Models
     {
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(255)]
+        [Required(ErrorMessage = "Enter customer's name")]
+        [StringLength(50)]
         public string Name { get; set; }
 
         public bool IsSubscribedToNewsLetter { get; set; }
@@ -19,6 +19,7 @@ namespace MyRents.Models
         // Navigation property - Allows to navigate from one model to another
         public MembershipType MemberShipType { get; set; }
 
+        // The type byte is implicit required, it can be optional if add an ? after it
         [Display(Name = "Membership Type")]
         // Entity Framework recognize this property as a foreign key to the MemberShipType table
         public byte MembershipTypeId { get; set; }
@@ -29,6 +30,8 @@ namespace MyRents.Models
         [Display(Name = "Date of Birth")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        // Custom validation
+        [Min18YearsIfMember]
         public DateTime?  Birthday { get; set; }
     
     }

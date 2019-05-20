@@ -56,6 +56,7 @@ namespace MyRents.Controllers
 
             var viewModel = new CustomerFormViewModel
             {
+                Customer = new Customer(),
                 MembershipTypes = membershipTypes
 
             };
@@ -68,6 +69,21 @@ namespace MyRents.Controllers
         // MVC frameworks bind the model from the form to the controller
         public ActionResult Save(Customer customer)
         {
+
+            // ModelState properties are obtained through the model (required, length...)
+            if (!ModelState.IsValid)
+            {
+                // Return to the form
+                var viewModel = new CustomerFormViewModel
+                {
+                    Customer = customer,
+                    MembershipTypes = _context.MembershipTypes.ToList()
+                };
+                return View("CustomerForm", viewModel);
+            }
+
+
+
             if (customer.Id == 0)
             {
                 // New customer, save to the DB

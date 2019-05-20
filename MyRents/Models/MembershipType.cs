@@ -18,5 +18,12 @@ namespace MyRents.Models
         public byte DurationInMonths { get; set; }
 
         public byte DiscountRate { get; set; }
+
+        // Adding readonly elements to help improve readability and maintainability
+        // This property will be used to check if an unknown membership type was choose
+        // obtained from the migration that populated membership type
+        public static readonly byte Unknown = 0;
+        public static readonly byte PayAsYouGo = 1;
+
     }
 }

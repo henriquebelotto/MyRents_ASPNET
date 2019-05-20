@@ -236,12 +236,17 @@
     <Compile Include="Migrations\201905190337499_modifiedPropertiesByteTobyte.Designer.cs">
       <DependentUpon>201905190337499_modifiedPropertiesByteTobyte.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905201512420_UpdateDataAnnotationForCustomerAndOthers.cs" />
+    <Compile Include="Migrations\201905201512420_UpdateDataAnnotationForCustomerAndOthers.Designer.cs">
+      <DependentUpon>201905201512420_UpdateDataAnnotationForCustomerAndOthers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
+    <Compile Include="Models\Min18YearsIfMember.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\MovieGenre.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -400,6 +405,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905190337499_modifiedPropertiesByteTobyte.resx">
       <DependentUpon>201905190337499_modifiedPropertiesByteTobyte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905201512420_UpdateDataAnnotationForCustomerAndOthers.resx">
+      <DependentUpon>201905201512420_UpdateDataAnnotationForCustomerAndOthers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -16,18 +16,14 @@ the object will be disposed (a closing html tag) -->
 
 @using (Html.BeginForm("Save", "Customers"))
 {
+    <!-- Validation summary - Display a summary of errors encountered -->
+    @Html.ValidationSummary()
+
     <!--Input for name -->
     <div class="form-group">
         @Html.LabelFor(m => m.Customer.Name)
         @Html.TextBoxFor(m => m.Customer.Name, new { @type = "text", @class = "form-control"})
-    </div>
-    <!--Input for Birthday -->
-    <div class="form-group">
-        @Html.LabelFor(m => m.Customer.Birthday)
-        <!--You Can use HTML tag or use the property Display inside the model-->
-        <!--<label for ="Birthday">Date of Birth:</label>-->
-        <!--HTML5 requires the format to be yyyy-MM-dd to work-->
-        @Html.TextBoxFor(m => m.Customer.Birthday, "{0:yyyy-MM-dd}",new { @type = "date", @class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Customer.Name)
     </div>
 
     <div class="form-group">
@@ -35,6 +31,17 @@ the object will be disposed (a closing html tag) -->
         @Html.DropDownListFor(m => m.Customer.MembershipTypeId,
             new SelectList(Model.MembershipTypes, "Id", "Name"), 
             "Select Membership Type", new { @class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Customer.MembershipTypeId)
+    </div>
+
+    <!--Input for Birthday -->
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.Birthday)
+        <!--You Can use HTML tag or use the property Display inside the model-->
+        <!--<label for ="Birthday">Date of Birth:</label>-->
+        <!--HTML5 requires the format to be yyyy-MM-dd to work-->
+        @Html.TextBoxFor(m => m.Customer.Birthday, "{0:yyyy-MM-dd}",new { @type = "date", @class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Customer.Birthday)
     </div>
 
     <!--Checkbox for newsletter -->
