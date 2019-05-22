@@ -29,12 +29,16 @@ namespace MyRents.Models
         [Display(Name = "Release Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime ReleaseDate { get; set; }
+        // Custom validation
+        [NoFutureDate]
+        // Using default date as today
+        public DateTime ReleaseDate { get; set; } = DateTime.Today;
 
         [Required]
         public DateTime DateAdded { get; set; }
 
         [Required]
+        [Range(1,20,ErrorMessage = "The {0} must be between {1} and {2}")]
         [Display(Name = "Number in Stock")]
         public int NumberInStock { get; set; }
 

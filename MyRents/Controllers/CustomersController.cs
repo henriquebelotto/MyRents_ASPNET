@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using MyRents.Models;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using MyRents.ViewModels;
 
 namespace MyRents.Controllers
@@ -61,6 +63,7 @@ namespace MyRents.Controllers
         {
 
             // ModelState properties are obtained through the model (required, length...)
+            // If modelState is NOT Valid means that a validation error occurred and the code should be stopped
             if (!ModelState.IsValid)
             {
                 // Return to the form
@@ -97,10 +100,18 @@ namespace MyRents.Controllers
                 customerInDB.MembershipTypeId = customer.MembershipTypeId;
                 customerInDB.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
             }
-           
+
 
             // Persisting the changes in the model
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbEntityValidationException dbEntityValidationException)
+            {
+                Console.WriteLine(dbEntityValidationException);
+            } 
+            
             return RedirectToAction("Index", "Customers");
         }
 
