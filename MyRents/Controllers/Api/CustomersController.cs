@@ -18,12 +18,14 @@ namespace MyRents.Controllers.Api
         }
 
         // GET /api/customers
+        [HttpGet]
         public IEnumerable<Customer> GetCustomers()
         {
             return _context.Customers.ToList();
         }
 
         // GET /api/customers/{1}
+        [HttpGet]
         public Customer GetCustomer(int id)
         {
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
@@ -61,7 +63,7 @@ namespace MyRents.Controllers.Api
         }
 
         // Update Customer
-        // PUT /api/customer/{1}
+        // PUT /api/customers/{1}
         [HttpPut]
         public void UpdateCustomer(int id, Customer customer)
         {
