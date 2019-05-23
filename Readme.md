@@ -7,7 +7,7 @@ This project is in development using ASP.NET and it intends to demonstrate some 
 - Migrations;
 - ViewModel;
 - Bootstrap;
-- Form validation (client and server-side);
+- Form validation and Data Annotation(client and server-side);
 - Use of Anti-forgery Token to avoid "Cross-Site Request Forgery" (CSRF) attack;
 
 *Project developed by Henrique Belotto following an Udemy course example @ 2019*
