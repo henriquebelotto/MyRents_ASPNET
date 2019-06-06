@@ -12,8 +12,7 @@ namespace MyRents.App_Start
     {
         public MappingProfile()
         {
-            // Following one of the many variants that I saw about how to use
-            // Automapper
+            // Following one of the many variants that I saw about how to use Automapper
 
             // Creating a Map between Customer and CustomerDto
             CreateMap<Customer, CustomerDto>();

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
+using MyRents.Dtos;
 using MyRents.Models;
 
 namespace MyRents.Controllers.Api
@@ -25,24 +27,26 @@ namespace MyRents.Controllers.Api
 
         // GET /api/customers
         [HttpGet]
-        public IEnumerable<Customer> GetCustomers()
+        public IEnumerable<CustomerDto> GetCustomers()
         {
-            return _context.Customers.ToList();
+            // Modifying to use Automapper - Mapping the Customer Object to CustomerDto
+            //When you the Select method, you need to pass a delegate
+            return _context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDto>);
         }
 
         // GET /api/customers/{1}
         [HttpGet]
-        public Customer GetCustomer(int id)
+        public CustomerDto GetCustomer(int id)
         {
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
 
-            // If customer is null (not found in the db), return NotFound exception
+            // If customerDto is null (not found in the db), return NotFound exception
             if (customer == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            return customer;
+            return Mapper.Map<Customer,CustomerDto>(customer);
         }
 
         // By convention, when a resource is created, the newly created resource, especially because
@@ -52,9 +56,9 @@ namespace MyRents.Controllers.Api
         // This way, it does not need the "mark" HttpPost
         // POST /api/customers
         [HttpPost]
-        public Customer CreateCustomer(Customer customer)
+        public CustomerDto CreateCustomer(CustomerDto customerDto)
         {
-            // The customer object will be in the request body and .Net Entity Framework will initialize it.
+            // The customerDto object will be in the request body and .Net Entity Framework will initialize it.
 
             if (!ModelState.IsValid)
             {
@@ -62,16 +66,21 @@ namespace MyRents.Controllers.Api
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
+            var customer = Mapper.Map<CustomerDto, Customer>(customerDto);
+
             _context.Customers.Add(customer);
             _context.SaveChanges();
 
-            return customer;
+            // The returned Dto has an Id, so it must be obtained from the customerDto object
+            customerDto.Id = customer.Id;
+
+            return customerDto;
         }
 
         // Update Customer
         // PUT /api/customers/{1}
         [HttpPut]
-        public void UpdateCustomer(int id, Customer customer)
+        public void UpdateCustomer(int id, CustomerDto customerDto)
         {
 
             if (!ModelState.IsValid)
@@ -82,16 +91,27 @@ namespace MyRents.Controllers.Api
 
             var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == id);
 
-            // If customer is null (not found in the db), return NotFound exception
+            // If customerDto is null (not found in the db), return NotFound exception
             if (customerInDb == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            customerInDb.Name = customer.Name;
-            customerInDb.Birthday = customer.Birthday;
-            customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
-            customerInDb.MembershipTypeId = customer.MembershipTypeId;
+            // Mapping from CustomerDto to a Customer using the customerInDB object,
+            // which was got from the context.
+            // Using the customerInDB object so the DBContext will be able to track changes
+            // in this object
+            
+            // Don't need to specify the classes inside the <> because the compiler
+            // can infer the types
+            Mapper.Map(customerDto, customerInDb);
+
+            // By using automapper, these codes are not required anymore.
+            // Kept just for sake of learning
+            //customerInDb.Name = customerDto.Name;
+            //customerInDb.Birthday = customerDto.Birthday;
+            //customerInDb.IsSubscribedToNewsLetter = customerDto.IsSubscribedToNewsLetter;
+            //customerInDb.MembershipTypeId = customerDto.MembershipTypeId;
 
             _context.SaveChanges();
         }
@@ -102,7 +122,7 @@ namespace MyRents.Controllers.Api
         {
             var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == id);
 
-            // If customer is null (not found in the db), return NotFound exception
+            // If customerDto is null (not found in the db), return NotFound exception
             if (customerInDb == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
