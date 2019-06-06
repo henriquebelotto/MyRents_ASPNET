@@ -6,6 +6,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using AutoMapper;
+using MyRents.App_Start;
 
 namespace MyRents
 {
@@ -13,6 +15,8 @@ namespace MyRents
     {
         protected void Application_Start()
         {
+            // Configuring the Automapper
+            Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
 
             GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();

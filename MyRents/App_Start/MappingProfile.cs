@@ -20,6 +20,9 @@ namespace MyRents.App_Start
             // Creating a Map between CustomerDto and Customer
             CreateMap<CustomerDto, Customer>();
 
+            // Can use the command .ReverseMap to create both maps at once
+            //  CreateMap<CustomerDto, Customer>().ReverseMap();
+
         }
     }
 }
