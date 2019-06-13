@@ -14,33 +14,102 @@ if, in the future, decide to change to another type, it will still work-->
 <div align="center" class="container">
     @Html.ActionLink("New Customer", "New", "Customers", new { @class = "btn btn-primary mb-3" })
 
-    <table class="table table-hover table-bordered w-50">
+    <table id="customers" class="table table-hover table-bordered w-50">
         <thead>
         <th scope="col" class="text-center">@ViewBag.Title</th>
         <th scope="col" class="text-center">Membership Type</th>
+        <th scope="col" class="text-center">Delete</th>
         </thead>
         <tbody>
-            <!--Empty Model, empty list-->
-            @if (!Model.Any())
+        <!--Empty Model, empty list-->
+        @if (!Model.Any())
+        {
+            <tr>
+                <td>We don't have any customer yet</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var customer in Model)
             {
                 <tr>
-                    <td>We don't have any customer yet</td>
+                    <td>
+                        @Html.ActionLink(customer.Name, "Edit", "Customers",
+                            new {id = customer.Id}, null)
+                    </td>
+                    <td>@customer.MemberShipType.Name</td>
+                    <td>
+                        <!-- class js-delete just to indicate that this class will be used by Javascript, not CSS -->
+                        <!-- Using custom data attribute "data-customer-id" to hold the id of the customer to use by the jquery script -->
+                        <button type="button" class="btn btn-link js-delete" data-customer-id="@customer.Id">Delete</button>
+                    </td>
                 </tr>
             }
-            else
-            {
-                foreach (var customer in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.ActionLink(customer.Name, "Edit", "Customers",
-                                new {id = customer.Id}, null)
-                        </td>
-                        <td>@customer.MemberShipType.Name</td>
-                    </tr>
-                }
 
-            }
+        }
         </tbody>
     </table>
+    
 </div>
+<!-- Modal - Using bootstrap dialog version, instead of regular javascript-->
+    <div class="modal" id="deleteModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Customer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this customer?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="deleteConfirm">Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section scripts{
+    <!-- Using JQUery to manage the action from the delete button -->
+    <script>
+        $(document).ready(function() {
+            // all JQuery goes inside this part
+
+            // Select #customers table and finds all elements with class js-delete
+            $("#customers .js-delete").on("click", function() {
+                    //getting a reference for the button to be used when it's clicked
+                    var button = $(this);
+
+                    //// Displaying a message to the user
+                    //if (confirm("Are you sure you want to delete this customer?")) {
+                    //    // if user confirms, use AJAX to call the api to delete the customer
+                    //    $.ajax({
+                    //        url: "/api/customers/" + button.attr("data-customer-id"),
+                    //        method: "DELETE",
+                    //        success: function() {
+                    //            button.parents("tr").remove();
+                    //        }
+                    //    });
+                    //}
+
+                    $("#deleteModal").modal();
+                    $("#deleteConfirm").on("click", function()
+                    {
+                        $.ajax({
+                            url: "/api/customers/" + button.attr("data-customer-id"),
+                            method: "DELETE",
+                            success: function() {
+                                button.parents("tr").remove();
+                            }
+                        });
+                        $("#deleteModal").modal("hide");
+
+                    });      
+            });
+        });
+
+    </script>
+}
