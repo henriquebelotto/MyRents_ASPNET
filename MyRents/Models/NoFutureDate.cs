@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using MyRents.Dtos;
 
 namespace MyRents.Models
 {
@@ -23,6 +24,12 @@ namespace MyRents.Models
                 // Getting access to the container class - In this case, Movie
                 var input = (Movie)validationContext.ObjectInstance;
                 date = input.ReleaseDate;
+            }
+            else if (validationContext.ObjectType == typeof(CustomerDto))
+            {
+                // Adding the verification for CustomerDto as required by the WebApi
+                var input = (CustomerDto) validationContext.ObjectInstance;
+                date = input.Birthday;
             }
 
 

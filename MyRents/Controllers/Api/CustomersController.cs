@@ -56,14 +56,19 @@ namespace MyRents.Controllers.Api
         // This way, it does not need the "mark" HttpPost
         // POST /api/customers
         [HttpPost]
-        public CustomerDto CreateCustomer(CustomerDto customerDto)
+        //public CustomerDto CreateCustomer(CustomerDto customerDto)
+        public IHttpActionResult CreateCustomer(CustomerDto customerDto)
         {
             // The customerDto object will be in the request body and .Net Entity Framework will initialize it.
 
             if (!ModelState.IsValid)
             {
                 // Customer validation failed
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                // To use with return type CustomerDto
+                //throw new HttpResponseException(HttpStatusCode.BadRequest);
+
+                // To use with return type IHttpActionResult
+                return BadRequest();
             }
 
             var customer = Mapper.Map<CustomerDto, Customer>(customerDto);
@@ -74,7 +79,11 @@ namespace MyRents.Controllers.Api
             // The returned Dto has an Id, so it must be obtained from the customerDto object
             customerDto.Id = customer.Id;
 
-            return customerDto;
+            // To use with return type CustomerDto
+            //return customerDto;
+            // To use with return type IHttpActionResult
+            // api/customers/id
+            return Created(new Uri(Request.RequestUri + "/" + customer.Id), customerDto);
         }
 
         // Update Customer

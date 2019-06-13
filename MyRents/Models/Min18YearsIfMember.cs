@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using AutoMapper;
+using MyRents.Dtos;
+using ValidationContext = System.ComponentModel.DataAnnotations.ValidationContext;
 
 namespace MyRents.Models
 {
@@ -12,7 +15,23 @@ namespace MyRents.Models
         {
 
             // Getting access to the container class - In this case, Customer
-            var customer = (Customer) validationContext.ObjectInstance;
+            // var customer = (Customer) validationContext.ObjectInstance;
+            var customer = new Customer();
+            
+            
+            if (validationContext.ObjectType == typeof(Customer))
+            {
+                // Customer Type
+                customer = (Customer)validationContext.ObjectInstance;
+            }
+            else
+            {
+                // Adding the verification for CustomerDto as required by the WebApi
+
+                // Mapping the Dto to a customer object
+                Mapper.Map((CustomerDto)validationContext.ObjectInstance, customer);
+            }
+
 
             
             if (customer.MembershipTypeId == MembershipType.Unknown || customer.MembershipTypeId == MembershipType.PayAsYouGo)
