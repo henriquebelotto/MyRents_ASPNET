@@ -19,6 +19,7 @@ namespace MyRents
 
             config.MapHttpAttributeRoutes();
 
+            // Defining the name of the router for the api
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

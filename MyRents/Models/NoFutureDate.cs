@@ -30,6 +30,12 @@ namespace MyRents.Models
                 // Adding the verification for CustomerDto as required by the WebApi
                 var input = (CustomerDto) validationContext.ObjectInstance;
                 date = input.Birthday;
+            }  
+            else if (validationContext.ObjectType == typeof(MovieDto))
+            {
+                // Adding the verification for MovieDto as required by the WebApi
+                var input = (MovieDto)validationContext.ObjectInstance;
+                date = input.ReleaseDate;
             }
 
 

@@ -9,25 +9,21 @@ namespace MyRents.Dtos
 {
     public class MovieDto
     {
+        //DTO (Data Transfer Object) for customer model
         public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }
 
+        [Required]
         public byte MovieGenreId { get; set; }
 
-        [Required]
         [NoFutureDate]
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; } = DateTime.Today;
 
-
         public DateTime DateAdded { get; set; }
 
-
-        [Required]
         public int NumberInStock { get; set; }
-
-
     }
 }

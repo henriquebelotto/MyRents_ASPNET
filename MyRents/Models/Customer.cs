@@ -21,6 +21,7 @@ namespace MyRents.Models
 
         // The type byte is implicit required, it can be optional if add an ? after it
         [Display(Name = "Membership Type")]
+        [Required]
         // Entity Framework recognize this property as a foreign key to the MemberShipType table
         public byte MembershipTypeId { get; set; }
 

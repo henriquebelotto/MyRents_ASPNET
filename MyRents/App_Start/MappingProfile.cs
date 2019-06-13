@@ -15,14 +15,22 @@ namespace MyRents.App_Start
             // Following one of the many variants that I saw about how to use Automapper
 
             // Creating a Map between Customer and CustomerDto
+            // API -> Outbound
             CreateMap<Customer, CustomerDto>();
 
-            // Creating a Map between CustomerDto and Customer
-            CreateMap<CustomerDto, Customer>();
+            // Creating a Map between CustomerDto and Customer an IGNORING the Id
+            // API <- Inbound
+            CreateMap<CustomerDto, Customer>()
+                .ForMember(c => c.Id, opt => opt.Ignore());
 
-            // Can use the command .ReverseMap to create both maps at once
-            //  CreateMap<CustomerDto, Customer>().ReverseMap();
+            // Creating a map from MovieDto to Movie class
+            // API -> Outbound
+            CreateMap<Movie, MovieDto>();
 
+            // Creating a map from Movie to MovieDto
+            // API <- Inbound
+            CreateMap<MovieDto, Movie>()
+                .ForMember(m => m.Id, opt => opt.Ignore());
         }
     }
 }

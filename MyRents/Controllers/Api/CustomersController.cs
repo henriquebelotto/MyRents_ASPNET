@@ -32,12 +32,12 @@ namespace MyRents.Controllers.Api
         {
             // Modifying to use Automapper - Mapping the Customer Object to CustomerDto
             //When you the Select method, you need to pass a delegate
-            //return _context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDto>);
+            var customerDtos = _context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDto>);
 
-            return Ok(_context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDto>));
+            return Ok(customerDtos);
         }
 
-        // GET /api/customers/{1}
+        // GET /api/customers/{id}
         [HttpGet]
         //public CustomerDto GetCustomer(int id)
         public IHttpActionResult GetCustomer(int id)
@@ -96,7 +96,7 @@ namespace MyRents.Controllers.Api
 
         // void is the right return type for 204 - No Content (update action)
         // Update Customer
-        // PUT /api/customers/{1}
+        // PUT /api/customers/{id}
         [HttpPut]
         public void UpdateCustomer(int id, CustomerDto customerDto)
         {
@@ -135,7 +135,7 @@ namespace MyRents.Controllers.Api
         }
 
         // void is the right return type for 204 - No Content (update action)
-        // DELETE /api/customers/{1}
+        // DELETE /api/customers/{id}
         [HttpDelete]
         public void DeleteCustomer(int id)
         {
