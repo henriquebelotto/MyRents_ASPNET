@@ -27,16 +27,20 @@ namespace MyRents.Controllers.Api
 
         // GET /api/customers
         [HttpGet]
-        public IEnumerable<CustomerDto> GetCustomers()
+        //public IEnumerable<CustomerDto> GetCustomers()
+        public IHttpActionResult GetCustomers()
         {
             // Modifying to use Automapper - Mapping the Customer Object to CustomerDto
             //When you the Select method, you need to pass a delegate
-            return _context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDto>);
+            //return _context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDto>);
+
+            return Ok(_context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDto>));
         }
 
         // GET /api/customers/{1}
         [HttpGet]
-        public CustomerDto GetCustomer(int id)
+        //public CustomerDto GetCustomer(int id)
+        public IHttpActionResult GetCustomer(int id)
         {
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
 
@@ -46,7 +50,11 @@ namespace MyRents.Controllers.Api
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            return Mapper.Map<Customer,CustomerDto>(customer);
+            // Using CustomerDto in the method declaration
+            //return Mapper.Map<Customer,CustomerDto>(customer);
+
+            // using IHttpActionResult in the method declaration
+            return Ok(Mapper.Map<Customer, CustomerDto>(customer));
         }
 
         // By convention, when a resource is created, the newly created resource, especially because
@@ -86,6 +94,7 @@ namespace MyRents.Controllers.Api
             return Created(new Uri(Request.RequestUri + "/" + customer.Id), customerDto);
         }
 
+        // void is the right return type for 204 - No Content (update action)
         // Update Customer
         // PUT /api/customers/{1}
         [HttpPut]
@@ -125,6 +134,7 @@ namespace MyRents.Controllers.Api
             _context.SaveChanges();
         }
 
+        // void is the right return type for 204 - No Content (update action)
         // DELETE /api/customers/{1}
         [HttpDelete]
         public void DeleteCustomer(int id)

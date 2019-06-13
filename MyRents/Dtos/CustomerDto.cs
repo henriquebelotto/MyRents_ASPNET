@@ -13,7 +13,7 @@ namespace MyRents.Dtos
 
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Enter customer's name")]
+        [Required]
         [StringLength(50)]
         public string Name { get; set; }
 
