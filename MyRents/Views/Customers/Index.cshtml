@@ -16,9 +16,11 @@ if, in the future, decide to change to another type, it will still work-->
 
     <table id="customers" class="table table-hover table-bordered w-50">
         <thead>
-        <th scope="col" class="text-center">@ViewBag.Title</th>
-        <th scope="col" class="text-center">Membership Type</th>
-        <th scope="col" class="text-center">Delete</th>
+            <tr>
+                <th scope="col" class="text-center">@ViewBag.Title</th>
+                <th scope="col" class="text-center">Membership Type</th>
+                <th scope="col" class="text-center">Delete</th>
+            </tr>
         </thead>
         <tbody>
         <!--Empty Model, empty list-->
@@ -42,7 +44,7 @@ if, in the future, decide to change to another type, it will still work-->
                         <!-- class js-delete just to indicate that this class will be used by Javascript, not CSS -->
                         <!-- Using custom data attribute "data-customer-id" to hold the id of the customer to use by the jquery script -->
                         <button type="button" class="btn btn-link js-delete" data-customer-id="@customer.Id" 
-                                data-toggle="tooltip" data-placement="right" title="Using JQuery">Delete</button>
+                                data-toggle="tooltip" data-placement="right" title="Using JQuery & AJAX">Delete</button>
                     </td>
                 </tr>
             }
@@ -79,8 +81,17 @@ if, in the future, decide to change to another type, it will still work-->
         $(document).ready(function() {
             // all JQuery goes inside this part
 
-            // Select #customers table and finds all elements with class js-delete
-            $("#customers .js-delete").on("click", function() {
+            // Adding DataTable functions to the table
+            $("#customers").DataTable();
+
+
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+
+            // Select #customers table and filter elements with the class js-delete
+            // This way, it's more efficient because there will be only one event handler in the memory, which gets the #customers id
+            $("#customers").on("click", ".js-delete",function() {
                     //getting a reference for the button to be used when it's clicked
                     var button = $(this);
 
