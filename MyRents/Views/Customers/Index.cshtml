@@ -23,67 +23,72 @@ if, in the future, decide to change to another type, it will still work-->
             </tr>
         </thead>
         <tbody>
-        <!--Empty Model, empty list-->
-        @if (!Model.Any())
-        {
-            <tr>
-                <td>We don't have any customer yet</td>
-            </tr>
-        }
-        else
-        {
-            foreach (var customer in Model)
+            <!--Empty Model, empty list-->
+            @if (!Model.Any())
             {
                 <tr>
-                    <td>
-                        @Html.ActionLink(customer.Name, "Edit", "Customers",
-                            new {id = customer.Id}, null)
-                    </td>
-                    <td>@customer.MemberShipType.Name</td>
-                    <td>
-                        <!-- class js-delete just to indicate that this class will be used by Javascript, not CSS -->
-                        <!-- Using custom data attribute "data-customer-id" to hold the id of the customer to use by the jquery script -->
-                        <button type="button" class="btn btn-link js-delete" data-customer-id="@customer.Id" 
-                                data-toggle="tooltip" data-placement="right" title="Using JQuery & AJAX">Delete</button>
-                    </td>
+                    <td>We don't have any customer yet</td>
+                    <td></td>
+                    <td></td>
                 </tr>
             }
+            else
+            {
+                foreach (var customer in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(customer.Name, "Edit", "Customers",
+                                new {id = customer.Id}, null)
+                        </td>
+                        <td>@customer.MemberShipType.Name</td>
+                        <td>
+                            <!-- class js-delete just to indicate that this class will be used by Javascript, not CSS -->
+                            <!-- Using custom data attribute "data-customer-id" to hold the id of the customer to use by the jquery script -->
+                            <button type="button" class="btn btn-link js-delete" data-customer-id="@customer.Id"
+                                    data-toggle="tooltip" data-placement="right" title="Using JQuery & AJAX">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                }
 
-        }
+            }
         </tbody>
     </table>
-    
+
 </div>
 <!-- Modal - Using bootstrap dialog version, instead of regular javascript-->
-    <div class="modal" id="deleteModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Delete Customer</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete this customer?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="deleteConfirm" aria-label="Confirm delete">Confirm</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
-                </div>
+<div class="modal" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Customer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this customer?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="deleteConfirm" aria-label="Confirm delete">Confirm</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
             </div>
         </div>
     </div>
+</div>
 
 @section scripts{
     <!-- Using JQUery to manage the action from the delete button -->
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // all JQuery goes inside this part
 
-            // Adding DataTable functions to the table
+             //Adding DataTable functions to the table
             $("#customers").DataTable();
 
+            var btnRef = $("customers");
 
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip();
@@ -91,31 +96,43 @@ if, in the future, decide to change to another type, it will still work-->
 
             // Select #customers table and filter elements with the class js-delete
             // This way, it's more efficient because there will be only one event handler in the memory, which gets the #customers id
-            $("#customers").on("click", ".js-delete",function() {
-                    //getting a reference for the button to be used when it's clicked
-                    var button = $(this);
+            $("#customers").on("click", ".js-delete", function () {
+                //getting a reference for the button to be used when it's clicked
+                var button = $(this);
+                console.log(button);
+
+                // get the reference to the button to be used by the modal
+                $("#deleteConfirm").data('ref', button);
 
                 // call the modal (display the dialog box on the screen)
                 $("#deleteModal").modal();
 
-                    // if the deleteConfirm button is clicked
-                    $("#deleteConfirm").on("click", function()
-                    {
-                        $.ajax({
-                            // Using AJAX to send a request to the server using the api
-                            // the customerId is obtained through the data-attribute in the delete button
-                            url: "/api/customers/" + button.attr("data-customer-id"),
-                            method: "DELETE",       
-                            success: function () {
-                                // case it's success, remove the row from the table
-                                button.parents("tr").remove();
-                            }
-                        });
-
-                        // hide de modal (dialog box)
-                        $("#deleteModal").modal("hide");
-                    });      
             });
+
+            // This way, it would work if I kept one click function inside the other
+            //$("#deleteConfirm").off().bind("click", function () { }
+
+            $("#deleteConfirm").on("click", function () {
+
+                // getting the reference to the delete button
+                var button = $(this).data('ref');
+
+                $.ajax({
+                    // Using AJAX to send a request to the server using the api
+                    // the customerId is obtained through the data-attribute in the delete button
+
+                    url: "/api/customers/" + button.attr("data-customer-id"),
+                    method: "DELETE",
+                    success: function () {
+                        // case it's success, remove the row from the table
+                        button.parents("tr").remove();
+                    }
+                });
+
+                // hide de modal (dialog box)
+                $("#deleteModal").modal("hide");
+            });
+
         });
 
     </script>
