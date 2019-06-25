@@ -22,6 +22,6 @@ This project is in development using ASP.NET and it intends to demonstrate some 
     - Add json with the customer/movie information
   - Delete Customers & Movies
     - (api/customers/{id}  api/movies/{id})
-
+- JQuery, DataTable, and AJAX used to create tables and call the Web APIs;
 
 *Project developed by Henrique Belotto following an Udemy course example @ 2019*
