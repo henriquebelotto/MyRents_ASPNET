@@ -31,6 +31,14 @@ namespace MyRents.App_Start
             // API <- Inbound
             CreateMap<MovieDto, Movie>()
                 .ForMember(m => m.Id, opt => opt.Ignore());
+
+            // Creating a map from MembershipType to MembershipTypeDto
+            // API -> Outbound
+            CreateMap<MembershipType, MembershipTypeDto>();
+
+            // Creating a map from MembershipType to MembershipTypeDto
+            // API -> Outbound
+            CreateMap<MovieGenre, MovieGenreDto>();
         }
     }
 }

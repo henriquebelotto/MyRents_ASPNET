@@ -7,6 +7,7 @@ using System.Web.Http;
 using AutoMapper;
 using MyRents.Dtos;
 using MyRents.Models;
+using System.Data.Entity;
 
 namespace MyRents.Controllers.Api
 {
@@ -25,7 +26,11 @@ namespace MyRents.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetMovies()
         {
-            return Ok(_context.Movies.ToList().Select(Mapper.Map<Movie, MovieDto>));
+            var movieDtos = _context.Movies
+                                .Include( m => m.MovieGenre)
+                                .ToList()
+                                .Select(Mapper.Map<Movie, MovieDto>);
+            return Ok(movieDtos);
         }
 
         // GET /api/movies/{id}

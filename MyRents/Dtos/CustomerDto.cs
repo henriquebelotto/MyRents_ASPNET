@@ -21,6 +21,8 @@ namespace MyRents.Dtos
 
         public byte MembershipTypeId { get; set; }
 
+        // Using the DTO
+        public MembershipTypeDto MembershipType { get; set; }
        
         [DataType(DataType.Date)]
         [Min18YearsIfMember]

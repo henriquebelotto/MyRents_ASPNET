@@ -7,6 +7,7 @@ using System.Web.Http;
 using AutoMapper;
 using MyRents.Dtos;
 using MyRents.Models;
+using System.Data.Entity;
 
 namespace MyRents.Controllers.Api
 {
@@ -32,7 +33,10 @@ namespace MyRents.Controllers.Api
         {
             // Modifying to use Automapper - Mapping the Customer Object to CustomerDto
             //When you the Select method, you need to pass a delegate
-            var customerDtos = _context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDto>);
+            var customerDtos = _context.Customers
+                                    .Include(c => c.MemberShipType)
+                                    .ToList()
+                                    .Select(Mapper.Map<Customer, CustomerDto>);
 
             return Ok(customerDtos);
         }

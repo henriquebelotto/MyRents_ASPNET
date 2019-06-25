@@ -33,9 +33,12 @@ namespace MyRents.Controllers
             // EAGER LOADING
             // THe Include method is to load the MembershipType model together.
             // Entity Framework does NOT include automatically a reference object
-            var customers = _context.Customers.Include(c => c.MemberShipType).ToList();
+
+            // Not needed because the table in the index page was rendered using the web api and ajax
+            //var customers = _context.Customers.Include(c => c.MemberShipType).ToList();
             
-            return View(customers);
+            //return View(customers);
+            return View();
         }
 
         // GET: CustomerForm
