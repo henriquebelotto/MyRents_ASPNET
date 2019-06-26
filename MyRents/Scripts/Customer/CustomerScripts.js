@@ -13,7 +13,7 @@
             {
                 data: "name",
                 render: function (data, type, customer) {
-                    return "<a href='/customer/edit/'" + customer.id + ">" + customer.name + "</a>";
+                    return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>";
                 }
             },
             {

@@ -260,6 +260,10 @@
     <Compile Include="Migrations\201905201512420_UpdateDataAnnotationForCustomerAndOthers.Designer.cs">
       <DependentUpon>201905201512420_UpdateDataAnnotationForCustomerAndOthers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906260227195_SeedUsers.cs" />
+    <Compile Include="Migrations\201906260227195_SeedUsers.Designer.cs">
+      <DependentUpon>201906260227195_SeedUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -547,7 +551,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\Movies\MovieScripts.js" />
+    <Content Include="Scripts\Movies\ReadOnlyListScripts.js" />
+    <Content Include="Scripts\Movies\ListScripts.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -593,7 +598,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
-    <Content Include="Views\Movies\Index.cshtml" />
+    <Content Include="Views\Movies\List.cshtml" />
     <Content Include="Views\Movies\Random.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Customers\CustomerForm.cshtml" />
@@ -607,6 +612,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Movies\ReadOnlyList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -662,6 +668,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905201512420_UpdateDataAnnotationForCustomerAndOthers.resx">
       <DependentUpon>201905201512420_UpdateDataAnnotationForCustomerAndOthers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906260227195_SeedUsers.resx">
+      <DependentUpon>201906260227195_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

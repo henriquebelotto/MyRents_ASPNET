@@ -30,13 +30,22 @@ namespace MyRents.Controllers
         // GET: Movies/Index
         public ViewResult Index()
         {
-            var movies = _context.Movies.Include(e => e.MovieGenre).ToList();
+            //var movies = _context.Movies.Include(e => e.MovieGenre).ToList();
 
-            return View(movies);
+            // User property give access to the current user
+            if (User.IsInRole(RoleName.canManageMovies))
+            {
+                // If user is logged with canManageMovies role, return List view
+                return View("List");
+            }
+
+            // User logged to another role - Return readOnlyList
+            return View("ReadOnlyList");
         }
 
-       
+
         // Display New movie form
+        [Authorize(Roles = RoleName.canManageMovies)]
         public ActionResult New()
         {
             var movieGenres = _context.MovieGenres.ToList();
@@ -56,6 +65,7 @@ namespace MyRents.Controllers
         [HttpPost]
         //To avoid CSRF attack using Anti-forgery Token - All the validation is done by ASP.NET MVC Framework
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.canManageMovies)]
         public ActionResult Save(Movie movie)
         {
             // If modelState is NOT Valid means that a validation error occurred and the code should be stopped
@@ -75,7 +85,7 @@ namespace MyRents.Controllers
 
                 // setting DateAdded for today's date
                 movie.DateAdded = DateTime.Today.Date;
-                
+
                 // Storing the movie in the DB
                 _context.Movies.Add(movie);
             }
@@ -102,11 +112,11 @@ namespace MyRents.Controllers
             {
                 Console.WriteLine(dbEntityValidationException);
             }
-            
+
             return RedirectToAction("Index", "Movies");
         }
 
-
+        [Authorize(Roles = RoleName.canManageMovies)]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(c => c.Id == id);

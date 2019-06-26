@@ -1,39 +1,20 @@
 ﻿
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-a {
+/*a {
     color: #878580;
     text-decoration: none;
     background-color: transparent;
-}
+}*/
 
 .nav-item > a {
     color: #fff;
     text-decoration: none;
-    background-color: transparent;
+    background-color: transparent; 
+    white-space: nowrap;
 }
 
 .nav-item > a:hover {
     color: #0f7864;
     text-decoration: underline;
-}
-
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
 }
 
 .nav-item {
@@ -44,8 +25,25 @@ textarea {
     text-decoration: none;
 }
 
+/* Choose the colour for the active link*/
 .active > a {
     color: #18bc9c;
+}
+
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
 }
 
 .index-content {
@@ -60,14 +58,17 @@ textarea {
     margin-top: 5%;
 }
 
+/* CSS for the validation */
 .field-validation-error {
     color: red
 }
 
+/* CSS for the validation */
 .input-validation-error {
     border: 2px solid red;
 }
 
+/* CSS for the validation */
 .validation-summary-errors {
     color: red
 }

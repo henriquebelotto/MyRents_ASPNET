@@ -1,0 +1,72 @@
+﻿<!-- View for Manager Role -->
+@{
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mb-4">@ViewBag.Title</h1>
+
+<div align="center" class="container">
+    @Html.ActionLink("New Movie", "New", "Movie", new { @class = "btn btn-primary mb-3" })
+
+    <table id="movies" class="table table-hover table-bordered w-50">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">@ViewBag.Title</th>
+                <th scope="col" class="text-center">Genre</th>
+                <th scope="col" class="text-center">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--Empty Model, empty list-->
+        @*@if (!Model.Any())
+            // Kept just for reference, the table is obtained through the web api and datatable
+            {
+                <tr>
+                    <td>We don't have any customer yet</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var movie in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(movie.Name, "Edit", "Movies",
+                                new {id = movie.Id},null)
+                        </td>
+                        <td>@movie.MovieGenre.Name</td>
+                    </tr>
+                }
+
+            }*@
+        </tbody>
+    </table>
+</div>
+
+<div class="modal" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Movie</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this Movie?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="deleteConfirm" aria-label="Confirm delete">Confirm</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <!-- Using external Javascript file-->
+    <script type="text/javascript" src="/Scripts/Movies/ListScripts.js"></script>
+}
+

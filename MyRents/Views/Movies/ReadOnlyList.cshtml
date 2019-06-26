@@ -1,6 +1,4 @@
-﻿<!--Using IEnumerable type because it's a base type for others, like List or Dictionary, so
-if, in the future, decide to change to another type, it will still work-->
-
+﻿<!-- View for Guest account -->
 @*@model IEnumerable<MyRents.Models.Movie>*@
 @{
     ViewBag.Title = "Movies";
@@ -10,39 +8,16 @@ if, in the future, decide to change to another type, it will still work-->
 <h1 class="mb-4">@ViewBag.Title</h1>
 
 <div align="center" class="container">
-    @Html.ActionLink("New Movie", "New", "Movie", new { @class = "btn btn-primary mb-3" })
 
     <table id="movies" class="table table-hover table-bordered w-50">
         <thead>
             <tr>
                 <th scope="col" class="text-center">@ViewBag.Title</th>
                 <th scope="col" class="text-center">Genre</th>
-                <th scope="col" class="text-center">Delete</th>
             </tr>
         </thead>
         <tbody>
-            <!--Empty Model, empty list-->
-        @*@if (!Model.Any())
-            // Kept just for reference, the table is obtained through the web api and datatable
-            {
-                <tr>
-                    <td>We don't have any customer yet</td>
-                </tr>
-            }
-            else
-            {
-                foreach (var movie in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.ActionLink(movie.Name, "Edit", "Movies",
-                                new {id = movie.Id},null)
-                        </td>
-                        <td>@movie.MovieGenre.Name</td>
-                    </tr>
-                }
-
-            }*@
+            <!--Populated by the DataTable-->      
         </tbody>
     </table>
 </div>
@@ -70,6 +45,6 @@ if, in the future, decide to change to another type, it will still work-->
 @section scripts
 {
     <!-- Using external Javascript file-->
-    <script type="text/javascript" src="/Scripts/Movies/MovieScripts.js"></script>
+    <script type="text/javascript" src="/Scripts/Movies/ReadOnlyListScripts.js"></script>
 }
 

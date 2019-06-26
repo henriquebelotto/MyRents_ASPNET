@@ -13,7 +13,7 @@
             {
                 data: "name",
                 render: function (data, type, movie) {
-                    return "<a href='/movie/edit/'" + movie.id + ">" + movie.name + "</a>";
+                    return "<a href='/movies/edit/" + movie.id + "'>" + movie.name + "</a>";
                 }
             },
             {
