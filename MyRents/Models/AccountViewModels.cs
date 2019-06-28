@@ -64,6 +64,11 @@ namespace MyRents.Models
 
     public class RegisterViewModel
     {
+        // adding Driving License to the view Model
+        [Required]
+        [Display(Name = "Driving License")]
+        public string DrivingLicense { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
