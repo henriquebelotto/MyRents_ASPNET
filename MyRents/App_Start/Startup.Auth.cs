@@ -55,12 +55,12 @@ namespace MyRents
             //   consumerSecret: "");
 
             app.UseFacebookAuthentication(
-               appId: "567975796939661",
+               appId: "secret",
                appSecret: "secret");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "726310608412-4d55nrt2ham9c8ardknqj095i5qg7d36.apps.googleusercontent.com",
+                ClientId = "secret",
                 ClientSecret = "secret"
             });
         }
