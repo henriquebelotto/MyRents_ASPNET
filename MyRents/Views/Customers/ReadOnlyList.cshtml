@@ -1,0 +1,30 @@
+﻿<!--Using IEnumerable type because it's a base type for others, like List or Dictionary, so
+if, in the future, decide to change to another type, it will still work-->
+@*@model IEnumerable<MyRents.Models.Customer>*@
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mb-4">@ViewBag.Title</h1>
+
+<div align="center" class="container">
+
+    <table id="customers" class="table table-hover table-bordered w-50 table-striped">
+        <thead class="text-center thead-dark">
+            <tr>
+                <th scope="col">@ViewBag.Title</th>
+                <th scope="col">Membership Type</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <!-- Table rendenred using JQuery.Datatables -->
+        </tbody>
+    </table>
+</div>
+
+
+@section scripts{
+    <!-- Using external Javascript file-->
+    <script type="text/javascript" src="/Scripts/Customer/ReadOnlyListScripts.js"></script>
+}

@@ -13,6 +13,9 @@ namespace MyRents
 
             // adding Authorize filter globally
             filters.Add(new AuthorizeAttribute());
+
+            // Adding filter to use only HTTPS (secure) URL
+            filters.Add(new RequireHttpsAttribute());
         }
     }
 }

@@ -23,8 +23,10 @@
             {
                 data: "id",
                 render: function (data) {
-                    return "<button type='button' class='btn btn-link js-delete' data-customer-id='" + data + "'" +
-                        "data-toggle='tooltip' data-placement='right' title='Using JQuery & AJAX'> Delete </button>"
+                    return "<button type='button' class='btn btn-link js-delete' data-customer-id='" +
+                        data +
+                        "'" +
+                        "data-toggle='tooltip' data-placement='right' title='Using JQuery & AJAX'> Delete </button>";
                 }
 
             }

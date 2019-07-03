@@ -11,12 +11,12 @@ if, in the future, decide to change to another type, it will still work-->
 <div align="center" class="container">
     @Html.ActionLink("New Customer", "New", "Customers", new { @class = "btn btn-primary mb-3" })
 
-    <table id="customers" class="table table-hover table-bordered w-50">
-        <thead>
+    <table id="customers" class="table table-hover table-bordered w-50 table-striped">
+        <thead class="text-center thead-dark">
             <tr>
-                <th scope="col" class="text-center">@ViewBag.Title</th>
-                <th scope="col" class="text-center">Membership Type</th>
-                <th scope="col" class="text-center">Delete</th>
+                <th scope="col">@ViewBag.Title</th>
+                <th scope="col">Membership Type</th>
+                <th scope="col">Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -87,5 +87,5 @@ if, in the future, decide to change to another type, it will still work-->
 
 @section scripts{
     <!-- Using external Javascript file-->
-    <script type="text/javascript" src="/Scripts/Customer/CustomerScripts.js"></script>
+    <script type="text/javascript" src="/Scripts/Customer/ListScripts.js"></script>
 }

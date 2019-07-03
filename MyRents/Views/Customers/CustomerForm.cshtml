@@ -1,13 +1,12 @@
 ﻿@model MyRents.ViewModels.CustomerFormViewModel
 @{
-    // Changing the Title according to the condition
-    var title = (Model.Customer == null) ? "New Customer" : "Update Customer";
+    // Changing the Title according to the condition - Get it from the model
+    ViewBag.Title = Model.Title;
 
-    ViewBag.Title = title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.title</h2>
+<h2>@ViewBag.Title</h2>
 
 <!--Helper method - ActionName: Save, Inside controller "Customers-->
 <!-- Render the <form> tag only, this method returns a disposable object

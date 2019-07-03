@@ -9,37 +9,16 @@
 <div align="center" class="container">
     @Html.ActionLink("New Movie", "New", "Movie", new { @class = "btn btn-primary mb-3" })
 
-    <table id="movies" class="table table-hover table-bordered w-50">
-        <thead>
+    <table id="movies" class="table table-hover table-bordered w-50 table-striped">
+        <thead class="text-center thead-dark">
             <tr>
-                <th scope="col" class="text-center">@ViewBag.Title</th>
-                <th scope="col" class="text-center">Genre</th>
-                <th scope="col" class="text-center">Delete</th>
+                <th scope="col">@ViewBag.Title</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Delete</th>
             </tr>
         </thead>
         <tbody>
-            <!--Empty Model, empty list-->
-        @*@if (!Model.Any())
-            // Kept just for reference, the table is obtained through the web api and datatable
-            {
-                <tr>
-                    <td>We don't have any customer yet</td>
-                </tr>
-            }
-            else
-            {
-                foreach (var movie in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.ActionLink(movie.Name, "Edit", "Movies",
-                                new {id = movie.Id},null)
-                        </td>
-                        <td>@movie.MovieGenre.Name</td>
-                    </tr>
-                }
-
-            }*@
+        <!--Table rendered using Jquery.Datatables-->
         </tbody>
     </table>
 </div>

@@ -14,7 +14,7 @@ namespace MyRents.ViewModels
 
         public Customer Customer { get; set; }
 
-        // Property to set the title of the view according to the option
+        // Property to set the title of the view according to the option - Used in the view
         public string Title
         {
             get

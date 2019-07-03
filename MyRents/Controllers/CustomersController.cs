@@ -16,8 +16,8 @@ namespace MyRents.Controllers
         // If using ReSharp, use the short-cut "ctor" + tab
         public CustomersController()
         {
-         _context = new ApplicationDbContext();
-       
+            _context = new ApplicationDbContext();
+
         }
 
         protected override void Dispose(bool disposing)
@@ -36,13 +36,23 @@ namespace MyRents.Controllers
 
             // Not needed because the table in the index page was rendered using the web api and ajax
             //var customers = _context.Customers.Include(c => c.MemberShipType).ToList();
-            
+
             //return View(customers);
-            return View();
+
+            if (User.IsInRole(RoleName.canManageMovies))
+            {
+                return View("List");
+            }
+
+
+            return View("ReadOnlyList");
+
+
         }
 
         // GET: CustomerForm
         [HttpGet]
+        [Authorize(Roles = RoleName.canManageMovies)]
         public ActionResult New()
         {
             var membershipTypes = _context.MembershipTypes.ToList();
@@ -54,13 +64,14 @@ namespace MyRents.Controllers
 
             };
             //Passing the viewModel to the view to be able to access its properties
-            return View("CustomerForm",viewModel);
+            return View("CustomerForm", viewModel);
         }
 
         // Only accessible using a post method
         [HttpPost]
         //To avoid CSRF attack using Anti-forgery Token - All the validation is done by ASP.NET MVC Framework
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.canManageMovies)]
         // MVC frameworks bind the model from the form to the controller
         public ActionResult Save(Customer customer)
         {
@@ -113,11 +124,12 @@ namespace MyRents.Controllers
             catch (DbEntityValidationException dbEntityValidationException)
             {
                 Console.WriteLine(dbEntityValidationException);
-            } 
-            
+            }
+
             return RedirectToAction("Index", "Customers");
         }
 
+        [Authorize(Roles = RoleName.canManageMovies)]
         public ActionResult Edit(int id)
         {
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
