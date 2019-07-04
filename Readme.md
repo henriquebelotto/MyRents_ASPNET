@@ -23,5 +23,6 @@ This project is in development using ASP.NET and it intends to demonstrate some 
   - Delete Customers & Movies
     - (api/customers/{id}  api/movies/{id})
 - JQuery, DataTable, and AJAX used to create tables and call the Web APIs;
+- Stateless (No sessions)
 
 *Project developed by Henrique Belotto following an Udemy course example @ 2019*

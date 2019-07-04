@@ -8,15 +8,12 @@
     @Scripts.Render("~/bundles/modernizr")
 
 
-    @Scripts.Render("~/bundles/lib")
-    @RenderSection("scripts", required: false)
-    
 </head>
 <body>
     @Html.Partial("_NavBar")
     <div class="container body-content">
         @RenderBody()
-        
+
         <div align="center">
             <footer>
                 <p>&copy; @DateTime.Now.Year - MyRents - Developed by Henrique Belotto</p>
@@ -24,6 +21,9 @@
         </div>
     </div>
 
+
+    @Scripts.Render("~/bundles/lib")
+    @RenderSection("scripts", required: false)
 
 </body>
 </html>

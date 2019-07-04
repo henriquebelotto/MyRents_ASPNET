@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using MyRents.Models;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using MyRents.ViewModels;
+using System.Runtime.Caching;
 
 namespace MyRents.Controllers
 {
@@ -38,6 +41,15 @@ namespace MyRents.Controllers
             //var customers = _context.Customers.Include(c => c.MemberShipType).ToList();
 
             //return View(customers);
+
+
+            // Using Data Caching - Just for reference
+            // Only use this after checking the performance profile
+            //if (MemoryCache.Default["Genres"] == null)
+            //{
+            //    MemoryCache.Default["Genres"] = _context.MovieGenres.ToList();
+            //}
+            //var genres = MemoryCache.Default["Genres"] as IEnumerable<MovieGenre>;
 
             if (User.IsInRole(RoleName.canManageMovies))
             {
