@@ -85,6 +85,7 @@ namespace MyRents.Controllers
 
                 // setting DateAdded for today's date
                 movie.DateAdded = DateTime.Today.Date;
+                movie.NumberAvailable = movie.NumberInStock;
 
                 // Storing the movie in the DB
                 _context.Movies.Add(movie);
@@ -100,6 +101,7 @@ namespace MyRents.Controllers
                 movieInDb.ReleaseDate = movie.ReleaseDate;
                 movieInDb.NumberInStock = movie.NumberInStock;
                 movieInDb.MovieGenreId = movie.MovieGenreId;
+                movieInDb.NumberAvailable = movie.NumberInStock;
 
             }
 

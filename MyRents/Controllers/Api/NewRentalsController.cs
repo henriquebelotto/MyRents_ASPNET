@@ -41,6 +41,7 @@ namespace MyRents.Controllers.Api
                     Customer = customer,
                     DateRented = System.DateTime.Now
                 };
+                movie.NumberAvailable--;
                 _context.Rentals.Add(rental);
             }
 

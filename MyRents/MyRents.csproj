@@ -279,6 +279,10 @@
     <Compile Include="Migrations\201907082134214_AddedRentalModel.Designer.cs">
       <DependentUpon>201907082134214_AddedRentalModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907082237241_AddedAvailableNumberToMovieModel.cs" />
+    <Compile Include="Migrations\201907082237241_AddedAvailableNumberToMovieModel.Designer.cs">
+      <DependentUpon>201907082237241_AddedAvailableNumberToMovieModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -708,6 +712,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907082134214_AddedRentalModel.resx">
       <DependentUpon>201907082134214_AddedRentalModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907082237241_AddedAvailableNumberToMovieModel.resx">
+      <DependentUpon>201907082237241_AddedAvailableNumberToMovieModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

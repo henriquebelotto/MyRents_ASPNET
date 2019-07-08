@@ -63,6 +63,7 @@ namespace MyRents.Controllers.Api
 
             // adding today's date for the DateAdded
             movie.DateAdded = DateTime.Today.Date;
+            movie.NumberAvailable = movie.NumberInStock;
             
             // Storing the movie in the db
             _context.Movies.Add(movie);
