@@ -190,6 +190,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CustomersController.cs" />
     <Compile Include="Controllers\Api\MoviesController.cs" />
+    <Compile Include="Controllers\Api\NewRentalsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Dtos\MembershipTypeDto.cs" />
     <Compile Include="Dtos\MovieDto.cs" />
     <Compile Include="Dtos\MovieGenreDto.cs" />
+    <Compile Include="Dtos\NewRentalDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -273,6 +275,10 @@
     <Compile Include="Migrations\201907031316235_AddedPhoneToIdentityMOdel.Designer.cs">
       <DependentUpon>201907031316235_AddedPhoneToIdentityMOdel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907082134214_AddedRentalModel.cs" />
+    <Compile Include="Migrations\201907082134214_AddedRentalModel.Designer.cs">
+      <DependentUpon>201907082134214_AddedRentalModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -289,6 +295,7 @@
     <Compile Include="Models\MovieGenre.cs" />
     <Compile Include="Models\NoFutureDate.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\Rental.cs" />
     <Compile Include="Models\ResetPasswordViewModel.cs" />
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="Models\SendCodeViewModel.cs" />
@@ -698,6 +705,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907031316235_AddedPhoneToIdentityMOdel.resx">
       <DependentUpon>201907031316235_AddedPhoneToIdentityMOdel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907082134214_AddedRentalModel.resx">
+      <DependentUpon>201907082134214_AddedRentalModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
