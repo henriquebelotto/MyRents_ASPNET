@@ -74,9 +74,10 @@
                 data: vm
             })
             .done(function () {
-                console.log("submitted");
+                toastr.success("Rentals successfully recorded.");
             })
-            .fail(function (){
+            .fail(function () {
+                toastr.fail("Something unexpected happened!");
             });
     });
 });
