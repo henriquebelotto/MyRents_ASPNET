@@ -24,11 +24,24 @@ namespace MyRents.Controllers.Api
 
         // GET /api/movies
         [HttpGet]
-        public IHttpActionResult GetMovies()
+        // Filtering the result according to the query input
+        // the default value is null
+        public IHttpActionResult GetMovies(string query = null)
         {
-            var movieDtos = _context.Movies
+            // Get only the available movies
+            var moviesQuery = _context.Movies
                                 .Include( m => m.MovieGenre)
-                                .ToList()
+                                .Where(m => m.NumberAvailable > 0);
+
+            // Querying the object according to the query input
+            if (!String.IsNullOrWhiteSpace(query))
+            {
+                // if query is NOT null or white space
+                moviesQuery = moviesQuery.Where(m => m.Name.Contains(query));
+            }
+                
+            // return only the movies that has the query value
+            var movieDtos = moviesQuery.ToList()
                                 .Select(Mapper.Map<Movie, MovieDto>);
             return Ok(movieDtos);
         }

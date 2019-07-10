@@ -22,6 +22,13 @@ namespace MyRents.Controllers.Api
         [HttpPost]
         public IHttpActionResult CreateNewRental(NewRentalDto newRental)
         {
+            if (newRental.MovieIds.Count == 0)
+            {
+                // No moviesIds added
+                return BadRequest("No MovieIds have been added");
+            }
+
+
             var customer = _context.Customers.SingleOrDefault(c => c.Id == newRental.CustomerId);
 
             if (customer == null)
@@ -29,12 +36,24 @@ namespace MyRents.Controllers.Api
                 return BadRequest("Invalid Customer ID");
             }
 
+
             // Loading multiple movies
             // SELECT * from Movies Where Id in (1, 2, 3..);
-            var movies = _context.Movies.Where(m => newRental.MovieIds.Contains(m.Id));
+            var movies = _context.Movies.Where(m => newRental.MovieIds.Contains(m.Id)).ToList();
+
+            if (movies.Count != newRental.MovieIds.Count)
+            {
+                // One or more movieIds are invalid
+                return BadRequest("One or more MovieIds are invalid");
+            }
 
             foreach (var movie in movies)
             {
+                if (movie.NumberAvailable == 0)
+                {
+                    return BadRequest("Movie " + movie.Name + "is not available");
+                }
+
                 Rental rental = new Rental
                 {
                     Movie = movie,

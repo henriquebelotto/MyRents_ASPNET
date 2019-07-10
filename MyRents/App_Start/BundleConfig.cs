@@ -12,7 +12,8 @@ namespace MyRents
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/bootstrap.bundle.min.js",
                         "~/Scripts/DataTables/jquery.dataTables.js",
-                        "~/Scripts/DataTables/dataTables.bootstrap4.js"));
+                        "~/Scripts/DataTables/dataTables.bootstrap4.js",
+                        "~/Scripts/TypeAhead.Bundle.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -26,6 +27,7 @@ namespace MyRents
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap_flatly.css",
                       "~/Content/DataTables/css/dataTables.bootstrap4.css",
+                      "~/Content/typeahead.css",
                       "~/Content/site.css"));
         }
     }

@@ -29,13 +29,24 @@ namespace MyRents.Controllers.Api
         // GET /api/customers
         [HttpGet]
         //public IEnumerable<CustomerDto> GetCustomers()
-        public IHttpActionResult GetCustomers()
+        // Option parameter: query
+        public IHttpActionResult GetCustomers( string query = null)
         {
             // Modifying to use Automapper - Mapping the Customer Object to CustomerDto
             //When you the Select method, you need to pass a delegate
-            var customerDtos = _context.Customers
-                                    .Include(c => c.MemberShipType)
-                                    .ToList()
+            // IQueryable object
+            var customersQuery = _context.Customers
+                                    .Include(c => c.MemberShipType);
+
+            // Applying filter to the customers selection
+            // check if the query has any value
+            if (!String.IsNullOrWhiteSpace(query))
+            {
+                customersQuery = customersQuery.Where(c => c.Name.Contains(query));
+            }
+
+            // map the customers object to customerDto and put in a list
+            var customerDtos = customersQuery.ToList()
                                     .Select(Mapper.Map<Customer, CustomerDto>);
 
             return Ok(customerDtos);

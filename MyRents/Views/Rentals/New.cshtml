@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "New Rental Form";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="container">
+
+    <form id="newRental">
+        <div class="form-group">
+            <label for="customer">Customer</label>
+            <div class="tt-container">
+                <input id="customer" type="text" value="" class="form-control typeahead" />
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="movie">Movie</label>
+            <div class="tt-container">
+                <input id="movie" type="text" value="" class="form-control typeahead" />
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <ul id="movies" class="list-group"></ul>
+            </div>
+        
+        </div>
+    
+
+        <button class="btn btn-primary mt-3">Submit</button>
+    </form>
+
+</div>
+
+@section scripts
+{
+    <!-- Using external Javascript file-->
+    <script type="text/javascript" src="/Scripts/NewRental/TypeAheadScript.js"></script>
+}
