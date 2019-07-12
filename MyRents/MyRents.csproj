@@ -592,7 +592,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Movies\ReadOnlyListScripts.js" />
     <Content Include="Scripts\Movies\ListScripts.js" />
-    <Content Include="Scripts\NewRental\TypeAheadScript.js" />
+    <Content Include="Scripts\NewRental\newRentalScripts.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />

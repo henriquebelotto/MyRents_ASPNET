@@ -64,11 +64,13 @@ textarea {
 }
 
 /* CSS for the validation */
-.input-validation-error {
+.input-validation-error, 
+input.error {
     border: 2px solid red;
 }
 
 /* CSS for the validation */
-.validation-summary-errors {
+.validation-summary-errors, 
+label.error {
     color: red
 }
