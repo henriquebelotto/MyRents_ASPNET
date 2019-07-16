@@ -13,7 +13,7 @@ namespace MyRents
                         "~/Scripts/bootstrap.bundle.min.js",
                         "~/Scripts/DataTables/jquery.dataTables.js",
                         "~/Scripts/DataTables/dataTables.bootstrap4.js",
-                        "~/Scripts/TypeAhead.Bundle.js",
+                        "~/Scripts/typeahead.bundle.js",
                         "~/Scripts/toastr.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

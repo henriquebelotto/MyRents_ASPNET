@@ -1,12 +1,19 @@
 ﻿$(document).ready(function () {
 
+    // Tutorial
+    // https://digitalfortress.tech/tutorial/smart-search-using-twitter-typeahead-bloodhound/
 
+    // viewModel
     var vm = {
         movieIds: []
-    }; // viewModel
+    }; 
 
     var customers = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        // datumTokenizer: Function, Required. 
+        // DatumTokenizer is a function which transforms the data(string/ array / object) being searched through into an array of strings.
+        datumTokenizer: Bloodhound.tokenizers.whitespace('name'),
+        // queryTokenizer: Function, Required.
+        // queryTokenizer is a function which converts the query string into an array of strings.
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
             url: '/api/customers?query=%QUERY',
@@ -17,6 +24,8 @@
     $('#customer').typeahead({
         minLength: 1,
         highlight: true,
+        hint: false,
+        autoselect: true
     }, {
             name: 'customers',
             display: 'name',
@@ -27,7 +36,7 @@
         });
 
     var movies = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        datumTokenizer: Bloodhound.tokenizers.whitespace('name'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
             url: '/api/movies?query=%QUERY',
@@ -37,7 +46,9 @@
 
     $('#movie').typeahead({
         minLength: 1,
-        highlight: true
+        highlight: true,
+        hint: false,
+        autoselect: true
     },
         {
             name: 'movies',
@@ -66,14 +77,17 @@
         function () {
             // make sure that the viewModel (vm) has a property called customerId and it's not zero
             return vm.customerId && vm.customerId !== 0;
-        }, "Please, select a valid customer from the list");
+        }, "Please, select a valid customer");
+
+    $.validator.addMethod("validMovieList",
+        function() {
+            // make sure that vm.movieIds has at least one Id
+            return vm.movieIds.length > 0;
+        }, "Please, select at least one movie");
 
     // Adding client-side validation with JQUery
-    $("#newRental").validate({
+    var validator = $("#newRental").validate({
         submitHandler: function () {
-            // If this function is valid, it will call the submit method for the form
-            e.preventDefault();
-
             // using AJAX
             $.ajax({
                 url: "/api/newRentals",
@@ -82,14 +96,27 @@
             })
                 .done(function () {
                     toastr.success("Rentals successfully recorded.");
+
+                    // clear the input field
+                    $('#customer').typeahead("val", "");
+                    $('#movie').typeahead("val", "");
+                    $('#movies').empty();
+
+                    // clearing the viewModel
+                    vm = { movieIds: [] };
+
+                    // reset the validator
+                    validator.resetForm();
                 })
                 .fail(function () {
                     toastr.fail("Something unexpected happened!");
                 });
+
+            // To prevent the form from being submitted  normally by the HTML
+            return false;
         }
     });
 
-    $("#newRental").validate();
     // Submit method move inside the validation method
     //$('#newRental').submit(function(e) {
     //    // Preventing to have a traditional HTML form
