@@ -13,7 +13,7 @@ namespace MyRents.Controllers.Api
 {
     public class CustomersController : ApiController
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         // APIs shouldn't use domain objects, such as Customer, because we are constantly modifying these
         // objects and this will modify the API constantly. Then, if another software/website is using this API,
@@ -21,9 +21,9 @@ namespace MyRents.Controllers.Api
        
        // APIs should be stables as much as possible
 
-        public CustomersController()
+        public CustomersController(ApplicationDbContext context)
         {
-            _context = new ApplicationDbContext();
+            _context = context;
         }
 
         // GET /api/customers

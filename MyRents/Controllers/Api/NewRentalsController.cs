@@ -12,11 +12,11 @@ namespace MyRents.Controllers.Api
 {
     public class NewRentalsController : ApiController
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public NewRentalsController()
+        public NewRentalsController(ApplicationDbContext context)
         {
-            _context = new ApplicationDbContext();
+            _context = context;
         }
 
         [HttpPost]

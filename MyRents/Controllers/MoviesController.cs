@@ -14,16 +14,16 @@ namespace MyRents.Controllers
     {
 
         // prefix underline because it's a private variable
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
         }
 
-        public MoviesController()
+        public MoviesController(ApplicationDbContext context)
         {
-            _context = new ApplicationDbContext();
+            _context = context;
         }
 
         // Using ViewResult method because the only return method is a view

@@ -14,12 +14,12 @@ namespace MyRents.Controllers
     public class CustomersController : Controller
     {
         // prefix underline because it's a private variable
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         // If using ReSharp, use the short-cut "ctor" + tab
-        public CustomersController()
+        public CustomersController(ApplicationDbContext context)
         {
-            _context = new ApplicationDbContext();
+            _context = context;
 
         }
 
